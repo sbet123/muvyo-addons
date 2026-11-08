@@ -1,0 +1,30 @@
+{
+ "version": 1,
+ "certificate": {
+  "certificate": {
+   "aud": "mediavault-addon-author",
+   "author": "sbet123",
+   "author_id": "gh-50949847",
+   "content_key": "eHlKrjkGZsuDJ6/3GzUYyKVIRjGYJcZSTSwAeA8HzwE=",
+   "content_key_version": 1,
+   "expires_at": 1825651213,
+   "installation_key": "VW8epvbIQ/9x3k8blqPlWL59YcnwDNwrav4YKUJBBMw=",
+   "issued_at": 1794115213,
+   "namespace": "sbet123",
+   "public_key": "Zv6mBEdUpWtE04Oj2vH3/ssK+XMRcExyBjh0QhRCerE=",
+   "serial": 24,
+   "version": 1
+  },
+  "signature": "oANq4MK/3K/OPlkrpogeEVN0kv7N1FYr6OQfGjGKfpZn77CRHvWpT61CP5Ty3dj1Bd7gyigwgTKbzPgbiXUmBg=="
+ },
+ "payload": {
+  "plugin_id": "sbet123.tg-checkin",
+  "version": "1.0.0",
+  "files": {
+   "README.md": "2a961b85aa50e3a3579f92db8672fb1c2ad7c3deb28e189bcc54bc2d13661636",
+   "encrypted.json": "e0a0d7600fcc5c711b88c5b0860ff7446081f3181f1565e95639bd52a891ffa1",
+   "manifest.json": "ba4f3d5e0245b8e6764c1f0c2fe19ef2574ed6cf3fdc08b738c20062abee0be9"
+  }
+ },
+ "signature": "xI1Y33/Ck5jqMaHbKnCCDHESuY3SkkN9uh1MqjWqhvSkZoPqg8LTAimUgAcM8A/VqbTazJhPKmO4CjnaFVSqAw=="
+}

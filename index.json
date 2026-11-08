@@ -1,0 +1,16 @@
+{
+  "name": "sbet123 的插件",
+  "sequence": 1,
+  "plugins": [
+    {
+      "id": "sbet123.tg-checkin",
+      "name": "TG 自动签到",
+      "version": "1.0.0",
+      "description": "最多 5 条独立的定时任务：每条自己填名称、聊天对象（机器人）和聊天内容，按你设定的时间发给对应的 Telegram 机器人，用于每日签到；默认发给 @yingshiziyuan_bot。",
+      "author": "sbet123",
+      "path": "plugins/sbet123.tg-checkin",
+      "api": 1
+    }
+  ],
+  "public_key": "Nl7saiaMFJC/Mt06nd+iZjODmKtbl+5er5N3PS19yS4="
+}
