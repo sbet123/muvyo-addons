@@ -2,10 +2,10 @@
   "api": 1,
   "id": "sbet123.xinghe",
   "name": "星河",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "min_mv_version": "3.13.0",
   "author": "sbet123",
-  "description": "每天给 @yingshiziyuan_bot 发送 /sign 完成签到，读取机器人回复，把「获得积分、当前积分」整理成一条签到通知；机器人有连续签到时一并显示。",
+  "description": "每天给 @yingshiziyuan_bot 发送 /sign 完成签到，读取机器人回复，把「获得积分、当前积分」整理成一条签到通知；机器人有连续签到天数时一并显示。",
   "permissions": {
     "domains": [],
     "muvyo": [
@@ -44,7 +44,7 @@
       {
         "id": "checkin",
         "title": "每日签到",
-        "description": "给 @yingshiziyuan_bot 发送 /sign，读取回复并整理获得积分、当前积分（有连续签到时一并显示）",
+        "description": "给 @yingshiziyuan_bot 发送 /sign，读取回复并整理获得积分、当前积分（有连续签到天数时一并显示）",
         "kind": "checkin",
         "interval_minutes": 1440
       }

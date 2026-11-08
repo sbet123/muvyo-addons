@@ -19,12 +19,12 @@
  },
  "payload": {
   "plugin_id": "sbet123.xinghe",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "files": {
-   "README.md": "e9c8d5c99ca240e4eea4f61940750c8a3cdd58cd0e3b4ea27cf6a6801cbdb3f1",
-   "encrypted.json": "8f4310fa316994271bbbf8ea3e699377d71b48b637ee59450e2119c61d34d6eb",
-   "manifest.json": "a6bdb57c4dfe5942020cd38660557d52fbceb0374d553be2f43b26bad5088b4a"
+   "README.md": "548b6a3e301221774da5bab1b9f457d9c4a6cac1b8efde042dbaae2a39c72c2c",
+   "encrypted.json": "c47b29d6eebd9e318760e3657368c6fea906298a7dea99bc611c526d18744db9",
+   "manifest.json": "129d78449e4b78bf7eb28e40df93afcb15bc1ec83ee0ff2cced0ec602e8e3872"
   }
  },
- "signature": "cncgNfe+9fu6A+YPtEcc5hpY4TYO+FN9XWM6iYMhwTR4rltrn0JbgTdRIbN3amN4IxVxZ6BxBgk9A0D2+zQWAg=="
+ "signature": "438+ptIDXlLLMH/X79JApcdnvbC79tCSz/RmQHoXvJlm9hcuG0Z6qo/TuEioeTUFW7qT8zJArWsR6yTLRvexAQ=="
 }
