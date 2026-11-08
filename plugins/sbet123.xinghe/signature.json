@@ -18,13 +18,13 @@
   "signature": "oANq4MK/3K/OPlkrpogeEVN0kv7N1FYr6OQfGjGKfpZn77CRHvWpT61CP5Ty3dj1Bd7gyigwgTKbzPgbiXUmBg=="
  },
  "payload": {
-  "plugin_id": "sbet123.tg-checkin",
+  "plugin_id": "sbet123.xinghe",
   "version": "1.0.0",
   "files": {
-   "README.md": "2a961b85aa50e3a3579f92db8672fb1c2ad7c3deb28e189bcc54bc2d13661636",
-   "encrypted.json": "e0a0d7600fcc5c711b88c5b0860ff7446081f3181f1565e95639bd52a891ffa1",
-   "manifest.json": "ba4f3d5e0245b8e6764c1f0c2fe19ef2574ed6cf3fdc08b738c20062abee0be9"
+   "README.md": "bb2211335eec62bbd04595d31c710c49e179c15d37ed9af224421fa17f865689",
+   "encrypted.json": "43b50d90c082f864efce19a0ecd25d6ec7f456589822af6eb4ee1722448c8c13",
+   "manifest.json": "a2820895a53ddb7cc2e1956d348269187579bce6ccb683762189dbadf7911b57"
   }
  },
- "signature": "xI1Y33/Ck5jqMaHbKnCCDHESuY3SkkN9uh1MqjWqhvSkZoPqg8LTAimUgAcM8A/VqbTazJhPKmO4CjnaFVSqAw=="
+ "signature": "4Pb34k/l+2l6kDaix6HfgHRSYXKT230+6GE0PoxJI/tjjPnG97uZf1Nj8H6o7/Z6dydcR8l7EX7zVkwoiM+jBQ=="
 }

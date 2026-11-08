@@ -1,115 +1,87 @@
-# TG 自动签到 · Muvyo 第三方插件仓库
+# 星河 · Muvyo 第三方插件仓库
 
-一个可以直接发布的 Muvyo 插件仓库：**5 条独立的签到任务**，每条自己填「名称 / 聊天对象 / 聊天内容」，在 Muvyo 的「定时任务」里给每条设自己的时刻，到点把内容发给对应的 Telegram 机器人。
+「星河」是一个 Muvyo 第三方插件：每天用你登录的 Telegram 账号给 **@yingshiziyuan_bot** 发送 `/sign` 签到，读取机器人回复，把 **获得积分 / 连续签到 / 当前积分** 整理成一条签到通知。
 
-> 先说明平台规则，避免走弯路：Muvyo 的定时任务**必须在打包时写进 `manifest.json` 的能力声明里**，运行时不能新增任务（上限 8 个）。所以「最多 5 条、每条可自定义」的实现方式是：清单里预置 5 个任务槽 `t1–t5`，每个槽配 3 个配置项。任务数量要改，只能改清单 + 重新签名发版。
->
-> 同理，能发消息的机器人也必须写在清单的 `telegram_bots` 里（最多 5 个）。这是 Muvyo 的安全设计：安装时用户能看到插件会给哪些机器人发消息。
+> 本仓库目前只发布一个插件：`sbet123.xinghe`（星河 1.0.0）。之前的 `sbet123.tg-checkin` 已删除。
 
----
+## 功能
 
-## 一、仓库长什么样
+- 定时任务「每日签到」：默认每天一次，由 Muvyo 的「定时任务」面板调度。
+- 发 `/sign`，等机器人回复，解析出三个数字：获得积分、连续签到、当前积分。
+- 返回给 Muvyo 的消息就是签到通知正文，例如：`获得积分 10 · 连续签到 3 天 · 当前积分 120`。
+- 插件设置页顶部显示上次签到的时间、积分和结果。
+- 机器人没回复时只标「结果未知」，不重试，避免重复签到。
+
+## Muvyo 里的任务面板
+
+安装后打开「定时任务」，能看到 **每日签到**，自带这些选项（和癫影插件一致，都是 Muvyo 平台提供的）：
+
+| 选项 | 说明 |
+|---|---|
+| 自动运行 | 打开后才会按计划执行 |
+| 推送签到结果 | 把上面的结果推到「签到」通知 |
+| 执行方式 | 每天固定时刻 / 间隔 / 时段内随机 |
+| 随机时段 | 例如 08:00–10:00，和癫影一样按 Muvyo 的随机时段执行 |
+
+## 仓库结构
 
 ```
-muvyo-tg-checkin/                    ← 你的 GitHub 仓库（公开）
+muvyo-tg-checkin/                    ← GitHub 仓库（公开）
   .gitignore                         忽略 src/、签名凭据、私钥
+  .gitattributes                     签名产物按原始字节存储（见下）
   .githooks/pre-commit               提交检查：拦住源码与私钥
   .claude/skills/muvyo-addon-publish/scripts/sign_index.py
-                                     官方模板的仓库索引签名工具
-  src/sbet123.tg-checkin/           源码（不提交）
+                                     仓库索引签名工具
+  src/sbet123.xinghe/                源码（不提交）
     manifest.json
     main.js
     README.md
-  index.json                         签名后生成（提交）
+  index.json                         签名产物（提交）
   index.json.sig                     仓库索引签名（提交）
-  plugins/sbet123.tg-checkin/       签名后的产物（提交）
+  plugins/sbet123.xinghe/            签名产物（提交）
 ```
 
 发布只提交 `index.json`、`index.json.sig`、`plugins/`。`src/` 不上传。
 
-## 二、一次性准备
+## 发布步骤（换机器时照做）
 
-1. **Muvyo 永久授权** + 在 Muvyo「插件 → 第三方插件 → 开发者」点「用 GitHub 账号领取证书」，按提示在 GitHub 输入验证码。
-2. 下载得到 `muvyo-signing.json`（作者证书 + 私钥，**绝不能提交**）和 `mv_addon.py`（签名脚本），都放到本仓库根目录。
-3. 本机装 Python 3 与依赖：
+1. 装 Python 3 与 `cryptography`：`pip install cryptography`。
+2. 在 Muvyo「插件 → 第三方插件 → 开发者」用 GitHub 账号领证书，把 `muvyo-signing.json` 和 `mv_addon.py` 放到本仓库根目录（两者都已被忽略）。
+3. 签名：
 
    ```powershell
-   pip install cryptography
+   python mv_addon.py sign .\src\sbet123.xinghe -o .
+   python mv_addon.py verify .\plugins\sbet123.xinghe
    ```
 
-4. 在 GitHub 新建一个 **public** 仓库（例如 `muvyo-tg-checkin`），把这套文件推上去（或先在本地建好再关联远端）。
+4. 签索引（首次建 `repo-signing.pem`，之后只跑 sign + verify）：
 
-## 三、已经填好的内容（不用再改）
+   ```powershell
+   python .claude\skills\muvyo-addon-publish\scripts\sign_index.py init-key --key repo-signing.pem
+   python .claude\skills\muvyo-addon-publish\scripts\sign_index.py sign --key repo-signing.pem
+   python .claude\skills\muvyo-addon-publish\scripts\sign_index.py verify
+   ```
 
-- 插件 ID：`sbet123.tg-checkin`（前缀 = 你的 GitHub 用户名 `sbet123`）
-- 作者：`sbet123`
-- 机器人白名单：`yingshiziyuan_bot`
-- 5 条任务的「聊天对象」已预填 `yingshiziyuan_bot`，安装后不用再填
+5. 提交推送：
 
-要加别的签到机器人：在 `permissions.telegram_bots` 数组里追加（**不带 @**、以 `bot` 结尾、最多 5 个），升 `version` 后重新签名发布。没写进这里的机器人，插件调用时会被拒绝——这就是「聊天对象」的白名单。
+   ```powershell
+   git add -A
+   git commit -m "发布 星河 1.0.0"
+   git push
+   ```
 
-### 可选：改显示名、描述、任务标题
+## 安装
 
-`name`、`description`、`tasks[].title` 随你改；`id` 定了就别再动（改了就是另一个插件）。
+1. Muvyo「第三方插件 → 插件仓库」添加：`https://github.com/sbet123/muvyo-tg-checkin`。
+2. 安装「星河」，确认使用 Telegram 机器人（`yingshiziyuan_bot`）。
+3. 插件设置里确认「签到命令」是 `/sign`。
+4. 打开「定时任务 → 每日签到」，打开自动运行，按需打开推送签到结果，选择执行方式和时段。
 
-## 四、签名并发布
+## 发布时的换行坑（重要）
 
-### 1. 签插件
+签名哈希是对**文件原始字节**算的。Windows 上签名脚本写出的 `index.json`、`manifest.json`、`README.md` 是 CRLF，而 Git 默认会把它们转成 LF，线上字节和签名对不上，Muvyo 会报「插件文件与签名不符」。
 
-```powershell
-python mv_addon.py sign .\src\sbet123.tg-checkin -o .
-```
-
-产物落到根目录：`index.json`、`plugins/sbet123.tg-checkin/{manifest.json, encrypted.json, README.md, signature.json}`。检查一下：
-
-```powershell
-python mv_addon.py verify .\plugins\sbet123.tg-checkin
-```
-
-### 2. 签仓库索引（首次要建仓库专用密钥）
-
-```powershell
-# 只做一次：生成仓库签名私钥（会写进 .gitignore，务必另行备份）
-python .claude\skills\muvyo-addon-publish\scripts\sign_index.py init-key --key repo-signing.pem
-
-# 每次发布
-python .claude\skills\muvyo-addon-publish\scripts\sign_index.py sign --key repo-signing.pem
-python .claude\skills\muvyo-addon-publish\scripts\sign_index.py verify
-```
-
-`sign` 会把公钥写进 `index.json` 并生成 `index.json.sig`。**索引任何改动都要重新 sign**，否则 Muvyo 拒绝读取仓库。
-
-### 3. 推送
-
-```powershell
-git config core.hooksPath .githooks     # 启用提交检查，防止误传 src/ 和私钥
-git add index.json index.json.sig plugins
-# 首次提交还要加上仓库骨架：
-# git add README.md .gitignore .githooks .claude
-git commit -m "发布 TG 自动签到 1.0.0"
-git push
-```
-
-发布纪律：只用默认加密签名（不要 `--no-encrypt`），不上传 `src/`、明文 JS 或任何凭据。提交检查会拦下这些文件。
-
-## 五、在 Muvyo 里安装和使用
-
-1. 「第三方插件 → 插件仓库」添加仓库地址：`https://github.com/sbet123/muvyo-tg-checkin`。
-2. 列表里点安装，确认联网范围：**使用 Muvyo 的 Telegram 机器人**（会列出 `yingshiziyuan_bot`）、无额外网站域名。
-3. 插件设置里填 **任务 1–5**：
-   - 名称：随便写，用于区分；
-   - 聊天对象：已预填 `yingshiziyuan_bot`，不用动；
-   - 聊天内容：例如 `/checkin`（1–500 字，最多 4 行，具体命令以机器人提示为准）。
-4. 打开「定时任务」，给每个「每日签到 N」设定执行时刻（签到类默认是每天固定时刻）。用不到的任务把聊天内容清空，插件会跳过；如果界面能单独关闭某个任务，建议直接关掉，免得每天多出几条「跳过」记录。
-5. 到点后结果进「签到」通知；设置页顶部会显示每条任务最后一次的成功/失败。
-
-> 同一插件同一时间只执行一个任务，5 条尽量错开几分钟；每个插件每天最多发 30 条，5 条/天完全够用。
-
-## 六、发布时的换行坑（重要）
-
-签名哈希是对**文件原始字节**算的。Windows 上签名脚本写出的 `index.json`、`manifest.json`、`README.md` 是 CRLF，而 Git 默认会在提交时把文本转成 LF，线上字节就和签名对不上，Muvyo 会报「插件文件与签名不符」。
-
-仓库里的 `.gitattributes` 已经处理了：
+`.gitattributes` 里已经处理：
 
 ```
 index.json -text
@@ -117,35 +89,26 @@ index.json.sig -text
 plugins/** -text
 ```
 
-这几条让 Git 原样存字节，**不要删**。以后发布时注意：
+这几条让 Git 原样存字节，**不要删**。每次推送后对 GitHub 上取到的文件验一次签更稳妥。
 
-- 不要用会自动转换换行的编辑器保存 `plugins/` 下的产物；
-- 每次推送后按 Muvyo 的读取方式验一次：`python mv_addon.py verify .\plugins\sbet123.tg-checkin`（对本地工作区），或从 GitHub 重新下载一份再验；
-- 只改根目录 `README.md`、`.gitignore` 这类未签名文件时，不需要重新签名。
+## 更新版本
 
-## 七、以后改内容 / 加任务
+1. 改 `src/sbet123.xinghe/` 里的代码或清单，`manifest.json` 的 `version` 升号。
+2. 重新签名插件和索引（上面的第 3、4 步）。
+3. 提交推送；用户在插件仓库里会看到「可更新」。
 
-- **只改配置**（名称、机器人、内容、时间）：直接在 Muvyo 设置里改，不用重新签名。
-- **换机器人**（不在清单里的）：改 `manifest.json` 的 `telegram_bots` → 升 `version` → 重新签名 → 重新签索引 → 推送。
-- **改成 3 条或 8 条**：改 `capabilities.tasks`（上限 8）、对应增删 `config` 字段与 `settings.sections`，再升版本签名发布。
-- **更新**：用户端会看到「可更新」，确认后生效。
+## 常见问题
 
-## 八、常见问题
+**任务没执行**：确认「定时任务」里「每日签到」的自动运行已打开、时刻已到、Muvyo 的 Telegram 账号在线。
 
-**安装提示「插件 ID 必须以作者命名空间开头」**：`id` 前缀和 GitHub 用户名（小写）不一致。
+**通知里没有积分**：说明机器人回复里没有「获得积分 / 连续签到 / 当前积分」这几个词，通知会直接显示机器人原文；把原文发我，我可以加解析规则。
 
-**提示「插件未获准访问 …」**：本插件不需要任何网站域名，`permissions.domains` 保持 `[]` 即可。如果以后要直连 `api.telegram.org`，必须写进 `domains` 并在安装时确认。
+**提示「插件未获准使用 Telegram 机器人」**：安装确认时没允许，重装或更新时勾选。
 
-**任务报「机器人不在…」**：机器人没写进 `telegram_bots`，或写的时候带了 `@`/大小写不符。改清单重新签名。
+**提示「插件文件与签名不符」**：Git 换行被改动，检查 `.gitattributes` 是否还在，重新签名推送。
 
-**任务没执行**：检查「定时任务」里这个任务是否打开、时刻是否已过、Muvyo 的 Telegram 账号是否在线。
-
-**提示「今天发送次数已用完」**：平台限制每插件每天 30 条，5 条任务不会碰到；如果反复手动测试才会用完。
-
-**能不能发给群 / 频道 / 任意聊天对象**：不能。`telegram.bot` 服务只能给清单里声明的**机器人**发文字。要发群/频道，得改成用你自己的 Bot Token 直连 `api.telegram.org`（声明该域名 + 用 `secret` 配置存 token），但那条路走的是你自己的机器人，不是「用你的账号给签到机器人发命令」，签到场景不适用。
-
-**私钥丢了怎么办**：Muvyo 开发者页「作废这张证书」后重新领取、重新签名；仓库私钥丢了就无法再签索引，只能换新仓库地址（Muvyo 首次添加时记住公钥）。
+**能不能发群/频道**：不能，`telegram.bot` 只能给清单里声明的机器人发文字。
 
 ## 许可
 
-示例结构参考 [thsrite/muvyo-addon-guide](https://github.com/thsrite/muvyo-addon-guide)（模板 MIT-0）。本插件代码随你使用。
+结构参考 [thsrite/muvyo-addon-guide](https://github.com/thsrite/muvyo-addon-guide)（模板 MIT-0）。

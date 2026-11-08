@@ -1,0 +1,30 @@
+{
+  "api": 1,
+  "id": "sbet123.xinghe",
+  "name": "星河",
+  "version": "1.0.0",
+  "min_mv_version": "3.13.0",
+  "author": "sbet123",
+  "description": "每天给 @yingshiziyuan_bot 发送 /sign 完成签到，读取机器人回复，把「获得积分、连续签到、当前积分」整理成一条签到通知。",
+  "permissions": {
+    "domains": [],
+    "muvyo": ["telegram.bot"],
+    "telegram_bots": ["yingshiziyuan_bot"]
+  },
+  "config": [
+    {"key": "command", "label": "签到命令", "type": "text", "default": "/sign", "placeholder": "/sign",
+     "help": "发给机器人的文字，默认 /sign；机器人换了签到命令时在这里同步修改"}
+  ],
+  "settings": {
+    "description": "签到在「定时任务」里打开：可以设置自动运行、推送签到结果，执行方式可选每天固定时刻或时段内随机，默认每天一次。",
+    "sections": [
+      {"title": "签到", "fields": ["command"]}
+    ]
+  },
+  "capabilities": {
+    "account": {"title": "签到"},
+    "tasks": [
+      {"id": "checkin", "title": "每日签到", "description": "给 @yingshiziyuan_bot 发送 /sign，读取回复并整理获得积分、连续签到、当前积分", "kind": "checkin", "interval_minutes": 1440}
+    ]
+  }
+}
