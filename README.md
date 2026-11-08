@@ -26,7 +26,7 @@
 ## 仓库结构
 
 ```
-muvyo-tg-checkin/                    ← GitHub 仓库（公开）
+muvyo-addons/                        ← GitHub 仓库（公开）
   .gitignore                         忽略 src/、签名凭据、私钥
   .gitattributes                     签名产物按原始字节存储（见下）
   .githooks/pre-commit               提交检查：拦住源码与私钥
@@ -72,7 +72,7 @@ muvyo-tg-checkin/                    ← GitHub 仓库（公开）
 
 ## 安装
 
-1. Muvyo「第三方插件 → 插件仓库」添加：`https://github.com/sbet123/muvyo-tg-checkin`。
+1. Muvyo「第三方插件 → 插件仓库」添加：`https://github.com/sbet123/muvyo-addons`。
 2. 安装「星河」，确认使用 Telegram 机器人（`yingshiziyuan_bot`）。
 3. 插件设置里确认「签到命令」是 `/sign`。
 4. 打开「定时任务 → 每日签到」，打开自动运行，按需打开推送签到结果，选择执行方式和时段。
