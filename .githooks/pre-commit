@@ -1,0 +1,67 @@
+#!/bin/sh
+# Muvyo 插件仓库的提交检查：拦住源码、签名凭据和私钥，只放行签名产物。
+# 启用：git config core.hooksPath .githooks
+
+fail=0
+say() { printf '%s\n' "$*" >&2; }
+
+staged=$(git -c core.quotePath=false diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged" ] && exit 0
+
+while IFS= read -r f; do
+  [ -n "$f" ] || continue
+  base=${f##*/}
+  case "$f" in
+    src/*)
+      say "✗ ${f}：src/ 只用于本地开发，插件仓库只发布加密签名产物"
+      fail=1 ;;
+  esac
+  case "$base" in
+    muvyo-signing.json|*signing*.json|*.pem|*.key)
+      say "✗ ${f}：签名凭据或私钥文件，绝不能提交"
+      fail=1 ;;
+  esac
+  case "$f" in
+    plugins/*/*/*)
+      say "✗ ${f}：插件目录里不能有子目录"
+      fail=1 ;;
+    plugins/*/*)
+      case "$base" in
+        manifest.json|README.md|signature.json|encrypted.json) ;;
+        *) say "✗ ${f}：插件目录里只能有 manifest.json、encrypted.json、README.md、signature.json，不得上传明文 JS"
+           fail=1 ;;
+      esac ;;
+  esac
+  if git show ":$f" 2>/dev/null | grep -Eq 'BEGIN ([A-Z0-9]+ )?PRIVATE KEY-----'; then
+    say "✗ ${f}：内容里有私钥，绝不能提交"
+    fail=1
+  fi
+done <<EOF
+$staged
+EOF
+
+dirs=$(printf '%s\n' "$staged" | sed -n 's#^\(plugins/[^/]*\)/.*#\1#p' | sort -u)
+while IFS= read -r dir; do
+  [ -n "$dir" ] || continue
+  if [ -z "$(git ls-files -- "$dir/encrypted.json")" ]; then
+    say "✗ ${dir}：没有 encrypted.json，请使用默认加密方式重新签名"
+    fail=1
+  fi
+  if [ -n "$(git ls-files -- "$dir/*.js")" ]; then
+    say "✗ ${dir}：已加密的插件目录里还有明文 JS，请重新签名并 git add -A $dir"
+    fail=1
+  fi
+  if [ -z "$(git ls-files -- "$dir/signature.json")" ]; then
+    say "✗ ${dir}：没有 signature.json，请先签名"
+    fail=1
+  fi
+done <<EOF
+$dirs
+EOF
+
+if [ "$fail" -ne 0 ]; then
+  say ""
+  say "提交已取消。只需要提交 index.json 和 plugins/ 下签名后的文件。"
+  exit 1
+fi
+exit 0

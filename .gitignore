@@ -1,0 +1,14 @@
+# 源码不提交：Muvyo 只读取签名产物（index.json + plugins/）
+src/
+
+# 签名凭据与私钥，绝不能提交
+muvyo-signing.json
+repo-signing.pem
+*.pem
+*.key
+
+# 签名脚本从 Muvyo 开发者页下载，不必放进仓库
+mv_addon.py
+
+.DS_Store
+__pycache__/
