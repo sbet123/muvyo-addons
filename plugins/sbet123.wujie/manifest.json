@@ -2,10 +2,10 @@
   "api": 1,
   "id": "sbet123.wujie",
   "name": "无界签到",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "min_mv_version": "3.13.0",
   "author": "sbet123",
-  "description": "每天给 @boundlesscloud_bot 发送 /checkin 完成签到，读取机器人回复，把获得积分、连续签到、当前积分整理成一条签到通知。",
+  "description": "每天给 @boundlesscloud_bot 发送 /checkin 完成签到，读取机器人回复，把「余额 / 流量」奖励和「下次可签到时间」整理成一条签到通知；回复里有积分、连续签到字段时也一并解析。",
   "permissions": {
     "domains": [],
     "muvyo": ["telegram.bot"],
@@ -24,7 +24,7 @@
   "capabilities": {
     "account": {"title": "签到"},
     "tasks": [
-      {"id": "checkin", "title": "每日签到", "description": "给 @boundlesscloud_bot 发送 /checkin，读取回复并整理获得积分、连续签到、当前积分", "kind": "checkin", "interval_minutes": 1440}
+      {"id": "checkin", "title": "每日签到", "description": "给 @boundlesscloud_bot 发送 /checkin，读取回复并整理余额、流量奖励和下次可签到时间", "kind": "checkin", "interval_minutes": 1440}
     ]
   }
 }
