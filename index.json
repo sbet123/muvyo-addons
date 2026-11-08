@@ -1,7 +1,16 @@
 {
  "name": "sbet123 的插件",
- "sequence": 4,
+ "sequence": 5,
  "plugins": [
+  {
+   "id": "sbet123.wujie",
+   "name": "无界签到",
+   "version": "1.0.0",
+   "description": "每天给 @boundlesscloud_bot 发送 /checkin 完成签到，读取机器人回复，把获得积分、连续签到、当前积分整理成一条签到通知。",
+   "author": "sbet123",
+   "path": "plugins/sbet123.wujie",
+   "api": 1
+  },
   {
    "id": "sbet123.xinghe",
    "name": "星河",

@@ -1,0 +1,30 @@
+{
+ "version": 1,
+ "certificate": {
+  "certificate": {
+   "aud": "mediavault-addon-author",
+   "author": "sbet123",
+   "author_id": "gh-50949847",
+   "content_key": "eHlKrjkGZsuDJ6/3GzUYyKVIRjGYJcZSTSwAeA8HzwE=",
+   "content_key_version": 1,
+   "expires_at": 1825651213,
+   "installation_key": "VW8epvbIQ/9x3k8blqPlWL59YcnwDNwrav4YKUJBBMw=",
+   "issued_at": 1794115213,
+   "namespace": "sbet123",
+   "public_key": "Zv6mBEdUpWtE04Oj2vH3/ssK+XMRcExyBjh0QhRCerE=",
+   "serial": 24,
+   "version": 1
+  },
+  "signature": "oANq4MK/3K/OPlkrpogeEVN0kv7N1FYr6OQfGjGKfpZn77CRHvWpT61CP5Ty3dj1Bd7gyigwgTKbzPgbiXUmBg=="
+ },
+ "payload": {
+  "plugin_id": "sbet123.wujie",
+  "version": "1.0.0",
+  "files": {
+   "README.md": "a7e6dad7cc7a412bd124d502b744e27f5848f819a1c859a6111157b1b4b49e2b",
+   "encrypted.json": "ec0267103d235c84723a59d743a083875ce22b6a057d343ec98c84d476dcb318",
+   "manifest.json": "bf3c3074ac6ba3d312638b69a21fc3371117fed340ee373ddfdb2f95d1ce1332"
+  }
+ },
+ "signature": "6v1CipLRynd9kbsJ9ibGEVaJVHN1iN59jq1uapfefcn3uJfkpQ1fHl4PuIptzQAhBhyLJcfM2quFdPJTXic6Ag=="
+}
