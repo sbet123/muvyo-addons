@@ -2,3 +2,8 @@
 .githooks/* text eol=lf
 *.py text eol=lf
 *.sh text eol=lf
+
+# 签名产物必须原样存字节：Muvyo 按文件字节校验签名，任何换行转换都会导致验签失败
+index.json -text
+index.json.sig -text
+plugins/** -text
