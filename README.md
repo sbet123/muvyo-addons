@@ -105,14 +105,32 @@ git push
 
 > 同一插件同一时间只执行一个任务，5 条尽量错开几分钟；每个插件每天最多发 30 条，5 条/天完全够用。
 
-## 六、以后改内容 / 加任务
+## 六、发布时的换行坑（重要）
+
+签名哈希是对**文件原始字节**算的。Windows 上签名脚本写出的 `index.json`、`manifest.json`、`README.md` 是 CRLF，而 Git 默认会在提交时把文本转成 LF，线上字节就和签名对不上，Muvyo 会报「插件文件与签名不符」。
+
+仓库里的 `.gitattributes` 已经处理了：
+
+```
+index.json -text
+index.json.sig -text
+plugins/** -text
+```
+
+这几条让 Git 原样存字节，**不要删**。以后发布时注意：
+
+- 不要用会自动转换换行的编辑器保存 `plugins/` 下的产物；
+- 每次推送后按 Muvyo 的读取方式验一次：`python mv_addon.py verify .\plugins\sbet123.tg-checkin`（对本地工作区），或从 GitHub 重新下载一份再验；
+- 只改根目录 `README.md`、`.gitignore` 这类未签名文件时，不需要重新签名。
+
+## 七、以后改内容 / 加任务
 
 - **只改配置**（名称、机器人、内容、时间）：直接在 Muvyo 设置里改，不用重新签名。
 - **换机器人**（不在清单里的）：改 `manifest.json` 的 `telegram_bots` → 升 `version` → 重新签名 → 重新签索引 → 推送。
 - **改成 3 条或 8 条**：改 `capabilities.tasks`（上限 8）、对应增删 `config` 字段与 `settings.sections`，再升版本签名发布。
 - **更新**：用户端会看到「可更新」，确认后生效。
 
-## 七、常见问题
+## 八、常见问题
 
 **安装提示「插件 ID 必须以作者命名空间开头」**：`id` 前缀和 GitHub 用户名（小写）不一致。
 
