@@ -19,12 +19,12 @@
  },
  "payload": {
   "plugin_id": "sbet123.xinghe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "files": {
-   "README.md": "bb2211335eec62bbd04595d31c710c49e179c15d37ed9af224421fa17f865689",
-   "encrypted.json": "43b50d90c082f864efce19a0ecd25d6ec7f456589822af6eb4ee1722448c8c13",
-   "manifest.json": "a2820895a53ddb7cc2e1956d348269187579bce6ccb683762189dbadf7911b57"
+   "README.md": "e9c8d5c99ca240e4eea4f61940750c8a3cdd58cd0e3b4ea27cf6a6801cbdb3f1",
+   "encrypted.json": "8f4310fa316994271bbbf8ea3e699377d71b48b637ee59450e2119c61d34d6eb",
+   "manifest.json": "a6bdb57c4dfe5942020cd38660557d52fbceb0374d553be2f43b26bad5088b4a"
   }
  },
- "signature": "4Pb34k/l+2l6kDaix6HfgHRSYXKT230+6GE0PoxJI/tjjPnG97uZf1Nj8H6o7/Z6dydcR8l7EX7zVkwoiM+jBQ=="
+ "signature": "cncgNfe+9fu6A+YPtEcc5hpY4TYO+FN9XWM6iYMhwTR4rltrn0JbgTdRIbN3amN4IxVxZ6BxBgk9A0D2+zQWAg=="
 }
