@@ -2,7 +2,7 @@
   "api": 1,
   "id": "sbet123.wujie",
   "name": "无界签到",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "min_mv_version": "3.13.0",
   "author": "sbet123",
   "description": "每天给 @boundlesscloud_bot 发送 /checkin 完成签到，读取机器人回复，把「余额 / 流量」奖励、下次可签到时间，以及当天已签到时的距下次签到倒计时整理成一条签到通知。",
@@ -13,18 +13,20 @@
   },
   "config": [
     {"key": "command", "label": "签到命令", "type": "text", "default": "/checkin", "placeholder": "/checkin",
-     "help": "发给机器人的文字，默认 /checkin；机器人换了签到命令时在这里同步修改"}
+     "help": "发给机器人的文字，默认 /checkin；机器人换了签到命令时在这里同步修改"},
+    {"key": "wait_seconds", "label": "等待回复（秒）", "type": "number", "default": "30", "min": 5, "max": 30,
+     "step": 1, "unit": "秒", "help": "发完命令后等机器人回复的时间，平台上限 30 秒；机器人回得慢就拉满"}
   ],
   "settings": {
-    "description": "签到在「定时任务」里打开：可以设置自动运行、推送签到结果，执行方式可选每天固定时刻或时段内随机，默认每天一次。",
+    "description": "签到在「定时任务」里打开：第一次执行时间按你设定的时刻，之后按「间隔」方式每 24 小时 1 分钟一次；可设置自动运行、推送签到结果。",
     "sections": [
-      {"title": "签到", "fields": ["command"]}
+      {"title": "签到", "fields": ["command", "wait_seconds"]}
     ]
   },
   "capabilities": {
     "account": {"title": "签到"},
     "tasks": [
-      {"id": "checkin", "title": "每日签到", "description": "给 @boundlesscloud_bot 发送 /checkin，读取回复并整理余额、流量奖励、下次可签到时间或已签到倒计时", "kind": "checkin", "interval_minutes": 1440}
+      {"id": "checkin", "title": "每日签到", "description": "给 @boundlesscloud_bot 发送 /checkin，读取回复并整理余额、流量奖励、下次可签到时间或已签到倒计时", "kind": "checkin", "interval_minutes": 1441}
     ]
   }
 }
