@@ -19,12 +19,12 @@
  },
  "payload": {
   "plugin_id": "sbet123.wujie",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "files": {
-   "README.md": "86879f96b7f5764486707c277ab265686765eec602832abac8447c2e6d9957af",
-   "encrypted.json": "ecf49b0c838ac000638aa1636dabb5827de1c219f2918e9981d82c6d604bf0c5",
-   "manifest.json": "7839ffa2594bbdc4cacea1b0566cbbefa4124ae63dc571f483e741fed5df8a3e"
+   "README.md": "7375ac3d788ffb2aefa65b1ba11f71a0d3b924c2b155508efd9e55cb6bf582dd",
+   "encrypted.json": "52f50200f440d9199d184e808bb8541918ab85a65d93f75a9343bb5d54e67e61",
+   "manifest.json": "b6dcfbc6298f0e44bf306124c2499a9e49c88f4ba5c4484ee9a5723d4fd8e2e1"
   }
  },
- "signature": "SC/CZXYitWrpl8+bmDOskLSeVDzykYMyJXWAP9F5taOA2eZVwUot2gcyf+XODdIU13zjROh1NTnJFmg9j7ntDg=="
+ "signature": "wqLBlp5/HIWvNZCdV6h/knbdMyQx6ezJ8SxDwbaaD8YwUzeWOhCWowDlexpTZR1Na21Wp+wz62g+GEjdjbvCBA=="
 }

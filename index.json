@@ -1,12 +1,12 @@
 {
  "name": "sbet123 的插件",
- "sequence": 9,
+ "sequence": 10,
  "plugins": [
   {
    "id": "sbet123.wujie",
    "name": "无界签到",
-   "version": "1.0.3",
-   "description": "每天给 @boundlesscloud_bot 发送 /checkin 完成签到，读取机器人回复，把「余额 / 流量」奖励、下次可签到时间，以及当天已签到时的距下次签到倒计时整理成一条签到通知。",
+   "version": "1.0.4",
+   "description": "每天给 @boundlesscloud_bot 发送 /checkin 完成签到，读取机器人回复，整理余额 / 流量奖励、下次可签到时间或已签到倒计时，并显示按 24 小时 1 分钟推算的下次自动签到时间。",
    "author": "sbet123",
    "path": "plugins/sbet123.wujie",
    "api": 1
