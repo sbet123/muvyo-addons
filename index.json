@@ -1,6 +1,6 @@
 {
  "name": "sbet123 的插件",
- "sequence": 7,
+ "sequence": 8,
  "plugins": [
   {
    "id": "sbet123.wujie",
@@ -14,8 +14,8 @@
   {
    "id": "sbet123.xinghe",
    "name": "星河",
-   "version": "1.0.2",
-   "description": "每天给 @yingshiziyuan_bot 发送 /sign 完成签到，读取机器人回复，把「获得积分、当前积分」整理成一条签到通知；机器人有连续签到天数时一并显示。",
+   "version": "1.0.3",
+   "description": "每天给 @yingshiziyuan_bot 发送 /sign 完成签到，最多等 30 秒读取机器人回复，把「获得积分、连续签到、当前积分」整理成一条签到通知。",
    "author": "sbet123",
    "path": "plugins/sbet123.xinghe",
    "api": 1

@@ -4,7 +4,7 @@
 
 | 插件 | 插件 ID | 命令 | 机器人 | 版本 |
 |---|---|---|---|---|
-| 星河 | `sbet123.xinghe` | `/sign` | @yingshiziyuan_bot | 1.0.2 |
+| 星河 | `sbet123.xinghe` | `/sign` | @yingshiziyuan_bot | 1.0.3 |
 | 无界签到 | `sbet123.wujie` | `/checkin` | @boundlesscloud_bot | 1.0.2 |
 
 ## 功能
